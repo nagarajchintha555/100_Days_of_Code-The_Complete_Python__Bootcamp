@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock, Paper, Scissors Game</title>
+</head>
+<body>
+    <h2>Play Rock, Paper, Scissors!</h2>
+    <p>Type 0 for Rock, 1 for Paper, or 2 for Scissors.</p>
+    <input type="number" id="userChoice" min="0" max="2">
+    <button onclick="playGame()">Play</button>
+    <p id="result"></p>
+
+    <script>
+        const choices = ["Rock", "Paper", "Scissors"];
+        const images = [
+            `Rock: <pre>
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+</pre>`,
+            `Paper: <pre>
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+</pre>`,
+            `Scissors: <pre>
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+</pre>`
+        ];
+
+        function playGame() {
+            let userChoice = document.getElementById("userChoice").value;
+            if (userChoice < 0 || userChoice > 2) {
+                document.getElementById("result").innerHTML = "Invalid choice. You lose!";
+                return;
+            }
+
+            let computerChoice = Math.floor(Math.random() * 3);
+            let result = "";
+
+            if (userChoice == computerChoice) {
+                result = "It's a draw!";
+            } else if (
+                (userChoice == 0 && computerChoice == 2) ||
+                (userChoice == 1 && computerChoice == 0) ||
+                (userChoice == 2 && computerChoice == 1)
+            ) {
+                result = "You win!";
+            } else {
+                result = "You lose!";
+            }
+
+            document.getElementById("result").innerHTML =
+                `You chose ${choices[userChoice]}: ${images[userChoice]}<br>
+                Computer chose ${choices[computerChoice]}: ${images[computerChoice]}<br>
+                <b>${result}</b>`;
+        }
+    </script>
+</body>
+</html>
